@@ -1,0 +1,175 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MainApp());
+}
+
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget{
+    const HomePage({super.key});
+
+    @override
+    State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>{
+    int indice = 0;
+
+    final telas = const [
+      InicioTela(),
+      CursosTela(),
+      PerfilTela()
+    ];
+
+    final  titulos = const [
+      'Início',
+      'Meus cursos',
+      'Meu perfil'
+    ];
+
+    @override
+    Widget build(BuildContext context){
+      return Scaffold(
+      appBar: AppBar(
+        title: Text(titulos[indice]),
+      ),
+      body: Center(
+        child: telas[indice]
+      ),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: indice,
+        onDestinationSelected: (valor){
+          setState(() {
+            indice = valor;
+          });
+        },
+        destinations: const [
+          NavigationDestination(icon: Icon(Icons.home), label: 'Início'),
+          NavigationDestination(icon: Icon(Icons.school_outlined), label: 'Cursos'),
+          NavigationDestination(icon: Icon(Icons.person), label: 'Perfil'),
+        ],
+      ),
+    );
+    }
+}
+
+class InicioTela extends StatelessWidget{
+  const InicioTela({super.key});
+
+  @override
+  Widget build(BuildContext context){
+    return  ListView(
+        padding: const EdgeInsets.all(20),
+        children: [
+          Text(
+            'Olá, estudante!',
+            style: Theme.of(context)
+            .textTheme
+            .headlineMedium
+            ?.copyWith(
+              fontWeight: FontWeight.bold
+            ),
+          ),
+          SizedBox(height: 8,),
+          Text(
+            'Continue aprendendo e evoluindo.'
+          ),
+          SizedBox(height: 24,),
+          Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              gradient: const LinearGradient(
+                colors: [
+                  Colors.deepPurple,
+                  Colors.purpleAccent
+                ]
+              ),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 10,
+                  offset: Offset(0, 5)
+                )
+              ]
+            ),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.flutter_dash,
+                  color: Colors.white,
+                  size: 40,
+                ),
+                SizedBox(height: 16,),
+                Text(
+                  'Flutter Básico',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+                Text(
+                  '8 de 12 aulas concluídas',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                )
+              ],
+            )
+          ),
+          
+        ],
+    );    
+  }
+}
+
+class CursosTela extends StatelessWidget{
+  const CursosTela({super.key});
+
+  @override
+  Widget build(BuildContext context){
+
+
+  final cursos = const [
+    'Flutter Básico',
+    'Dart Essencial',
+    'Interfaces Mobile',
+  ];
+
+  return ListView.builder(
+    itemCount: cursos.length,
+    itemBuilder:(context, index) {
+      child
+    },
+
+
+
+    return ListView(
+
+    )
+  }
+}
+
+class PerfilTela extends StatelessWidget{
+  const PerfilTela({super.key});
+
+  @override
+  Widget build(BuildContext context){
+    return const Center(
+      child: Text('Tela perfil'),
+    );
+  }
+}
