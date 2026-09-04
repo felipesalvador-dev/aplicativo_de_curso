@@ -170,7 +170,25 @@ class PerfilTela extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return const Center(
-      child: Text('Tela perfil'),
-    );
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CircleAvatar(
+            radius: 46,
+            child: Icon(Icons.person, size:52),
+          ), // CircleAvatar
+          Text(
+            'Aluno Flutter',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold
+            ), // TextStyle
+          ), // Text
+          Text(
+            'aluno@gmail.com'
+          ) // Text
+        ],
+      ), // Column
+    ); // Center
   }
 }
