@@ -142,24 +142,25 @@ class CursosTela extends StatelessWidget{
   @override
   Widget build(BuildContext context){
 
+    final cursos = const [
+      'Flutter Básico',
+      'Dart Essencial',
+      'Interfaces Mobile'
+    ];
 
-  final cursos = const [
-    'Flutter Básico',
-    'Dart Essencial',
-    'Interfaces Mobile',
-  ];
-
-  return ListView.builder(
-    itemCount: cursos.length,
-    itemBuilder:(context, index) {
-      child
-    },
-
-
-
-    return ListView(
-
-    )
+    return ListView.builder(
+      itemCount: cursos.length,
+      itemBuilder: (context, indice) => Card (
+        child: ListTile(
+          leading: const CircleAvatar(
+            child: Icon(Icons.play_arrow),
+          ),
+          title: Text(cursos[indice]),
+          subtitle: const Text('Toque para continuar'),
+          trailing: const Icon(Icons.chevron_right),
+        ),
+      ),
+    );
   }
 }
 
