@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'telas/inicio_tela.dart';
+import 'telas/cursos_tela.dart';
+import 'telas/favoritos_tela.dart';
+import 'telas/perfil_tela.dart';
+
 void main() {
   runApp(const MainApp());
 }
@@ -11,184 +16,68 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      home: HomePage(),
     );
   }
 }
 
-class HomePage extends StatefulWidget{
-    const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
-    @override
-    State<HomePage> createState() => _HomePageState();
+  @override
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>{
-    int indice = 0;
+class _HomePageState extends State<HomePage> {
+  int indice = 0;
 
-    final telas = const [
-      InicioTela(),
-      CursosTela(),
-      PerfilTela()
-    ];
+  final telas = const [
+    InicioTela(),
+    CursosTela(),
+    FavoritosTela(),
+    PerfilTela(),
+  ];
 
-    final  titulos = const [
-      'Início',
-      'Meus cursos',
-      'Meu perfil'
-    ];
+  final titulos = const [
+    'Início',
+    'Meus cursos',
+    'Favoritos',
+    'Meu perfil',
+  ];
 
-    @override
-    Widget build(BuildContext context){
-      return Scaffold(
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       appBar: AppBar(
         title: Text(titulos[indice]),
       ),
-      body: Center(
-        child: telas[indice]
-      ),
+      body: telas[indice],
       bottomNavigationBar: NavigationBar(
         selectedIndex: indice,
-        onDestinationSelected: (valor){
+        onDestinationSelected: (valor) {
           setState(() {
             indice = valor;
           });
         },
         destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: 'Início'),
-          NavigationDestination(icon: Icon(Icons.school_outlined), label: 'Cursos'),
-          NavigationDestination(icon: Icon(Icons.person), label: 'Perfil'),
+          NavigationDestination(
+            icon: Icon(Icons.home),
+            label: 'Início',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.school_outlined),
+            label: 'Cursos',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.favorite),
+            label: 'Favoritos',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.person),
+            label: 'Perfil',
+          ),
         ],
       ),
     );
-    }
-}
-
-class InicioTela extends StatelessWidget{
-  const InicioTela({super.key});
-
-  @override
-  Widget build(BuildContext context){
-    return  ListView(
-        padding: const EdgeInsets.all(20),
-        children: [
-          Text(
-            'Olá, estudante!',
-            style: Theme.of(context)
-            .textTheme
-            .headlineMedium
-            ?.copyWith(
-              fontWeight: FontWeight.bold
-            ),
-          ),
-          SizedBox(height: 8,),
-          Text(
-            'Continue aprendendo e evoluindo.'
-          ),
-          SizedBox(height: 24,),
-          Container(
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              gradient: const LinearGradient(
-                colors: [
-                  Colors.deepPurple,
-                  Colors.purpleAccent
-                ]
-              ),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black26,
-                  blurRadius: 10,
-                  offset: Offset(0, 5)
-                )
-              ]
-            ),
-            child: const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(
-                  Icons.flutter_dash,
-                  color: Colors.white,
-                  size: 40,
-                ),
-                SizedBox(height: 16,),
-                Text(
-                  'Flutter Básico',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold
-                  ),
-                ),
-                Text(
-                  '8 de 12 aulas concluídas',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                )
-              ],
-            )
-          ),
-          
-        ],
-    );    
-  }
-}
-
-class CursosTela extends StatelessWidget{
-  const CursosTela({super.key});
-
-  @override
-  Widget build(BuildContext context){
-
-    final cursos = const [
-      'Flutter Básico',
-      'Dart Essencial',
-      'Interfaces Mobile'
-    ];
-
-    return ListView.builder(
-      itemCount: cursos.length,
-      itemBuilder: (context, indice) => Card (
-        child: ListTile(
-          leading: const CircleAvatar(
-            child: Icon(Icons.play_arrow),
-          ),
-          title: Text(cursos[indice]),
-          subtitle: const Text('Toque para continuar'),
-          trailing: const Icon(Icons.chevron_right),
-        ),
-      ),
-    );
-  }
-}
-
-class PerfilTela extends StatelessWidget{
-  const PerfilTela({super.key});
-
-  @override
-  Widget build(BuildContext context){
-    return const Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          CircleAvatar(
-            radius: 46,
-            child: Icon(Icons.person, size:52),
-          ), // CircleAvatar
-          Text(
-            'Aluno Flutter',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold
-            ), // TextStyle
-          ), // Text
-          Text(
-            'aluno@gmail.com'
-          ) // Text
-        ],
-      ), // Column
-    ); // Center
   }
 }
